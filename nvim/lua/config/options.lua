@@ -6,3 +6,8 @@ vim.opt.langmap =
 
 vim.g.autoformat = false
 vim.opt.spell = false
+
+-- Force diagnostics to update and show even while you are typing
+vim.diagnostic.config({
+  update_in_insert = true,
+})

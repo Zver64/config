@@ -14,3 +14,14 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.expandtab = true
   end,
 })
+
+-- Fix Dart diagnostics not displaying after text changes
+vim.api.nvim_create_autocmd({"TextChanged", "TextChangedI"}, {
+  pattern = "*.dart",
+  callback = function()
+    vim.defer_fn(function()
+      vim.diagnostic.show()
+    end, 50)
+  end,
+})
+
