@@ -11,3 +11,5 @@ vim.opt.spell = false
 vim.diagnostic.config({
   update_in_insert = true,
 })
+
+vim.o.exrc = true
