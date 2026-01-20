@@ -21,6 +21,11 @@ config.keys = {
 		mods = "CMD",
 		action = wezterm.action.ScrollToBottom,
 	},
+	{
+		key = "r",
+		mods = "CMD|SHIFT",
+		action = wezterm.action.ReloadConfiguration,
+	},
 }
 
 -- Create a copy of the default search_mode key table.
@@ -28,19 +33,17 @@ config.keys = {
 -- if not all WezTerm components are fully initialized yet.
 -- This ensures a valid table to work with.
 local search_mode = wezterm.gui.default_key_tables().search_mode or {}
-
--- Insert your custom binding into the copied table.
-table.insert(search_mode, {
-	key = "d",
-	mods = "CTRL",
-	action = wezterm.action.CopyMode("ClearPattern"),
-})
+local copy_mode = wezterm.gui.default_key_tables().copy_mode or {}
 
 table.insert(search_mode, { key = "[", mods = "CTRL", action = wezterm.action.CopyMode("Close") })
+table.insert(copy_mode, { key = "[", mods = "CTRL", action = wezterm.action.CopyMode("Close") })
+table.insert(search_mode, { key = 'Enter', mods = 'NONE', action = wezterm.action.CopyMode('AcceptPattern') })
+
 
 -- Assign the modified key table to the configuration.
 config.key_tables = {
 	search_mode = search_mode,
+  copy_mode = copy_mode,
 }
 
 return config
