@@ -16,6 +16,14 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   spec = {
+    {
+      "Wansmer/langmapper.nvim",
+      lazy = false,
+      priority = 1,
+      config = function()
+        require("langmapper").setup({})
+      end,
+    },
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     { import = "lazyvim.plugins.extras.linting.eslint" },
@@ -24,7 +32,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.editor.harpoon2" },
     -- import/override with your plugins
     { import = "plugins" },
-    {"akinsho/bufferline.nvim", enabled = false},
+    { "akinsho/bufferline.nvim", enabled = false },
   },
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
