@@ -11,7 +11,7 @@ return {
       end
       return normkey_orig(key)
     end
-    return {
+    return vim.tbl_deep_extend("force", opts, {
       picker = {
         actions = {
           delete_projects = function(picker, _)
@@ -56,6 +56,6 @@ return {
           },
         },
       },
-    }
+    })
   end,
 }
