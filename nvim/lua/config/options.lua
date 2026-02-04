@@ -33,3 +33,6 @@ vim.diagnostic.config({
 vim.o.exrc = true
 -- show actually changed characters
 vim.opt.diffopt:append("linematch:60")
+
+vim.opt.tabstop = 4;
+vim.opt.shiftwidth = 4;
