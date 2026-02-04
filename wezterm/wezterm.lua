@@ -1,6 +1,7 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
+config.font = wezterm.font("FiraMono Nerd Font")
 config.font_size = 16
 config.color_scheme = "Catppuccin Mocha"
 config.scrollback_lines = 50000
