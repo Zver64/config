@@ -26,6 +26,20 @@ config.keys = {
 		mods = "CMD|SHIFT",
 		action = wezterm.action.ReloadConfiguration,
 	},
+	{
+		key = "w",
+		mods = "CMD",
+		action = wezterm.action.CloseCurrentPane({ confirm = true }),
+	},
+	{
+		key = "|",
+		mods = "CMD|SHIFT",
+		action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' },
+	},
+	{ key = "h", mods = "CMD|ALT", action = wezterm.action.ActivatePaneDirection("Left") },
+	{ key = "l", mods = "CMD|ALT", action = wezterm.action.ActivatePaneDirection("Right") },
+	{ key = "k", mods = "CMD|ALT", action = wezterm.action.ActivatePaneDirection("Up") },
+	{ key = "j", mods = "CMD|ALT", action = wezterm.action.ActivatePaneDirection("Down") },
 }
 
 -- Create a copy of the default search_mode key table.
@@ -37,13 +51,12 @@ local copy_mode = wezterm.gui.default_key_tables().copy_mode or {}
 
 table.insert(search_mode, { key = "[", mods = "CTRL", action = wezterm.action.CopyMode("Close") })
 table.insert(copy_mode, { key = "[", mods = "CTRL", action = wezterm.action.CopyMode("Close") })
-table.insert(search_mode, { key = 'Enter', mods = 'NONE', action = wezterm.action.CopyMode('AcceptPattern') })
-
+table.insert(search_mode, { key = "Enter", mods = "NONE", action = wezterm.action.CopyMode("AcceptPattern") })
 
 -- Assign the modified key table to the configuration.
 config.key_tables = {
 	search_mode = search_mode,
-  copy_mode = copy_mode,
+	copy_mode = copy_mode,
 }
 
 return config
