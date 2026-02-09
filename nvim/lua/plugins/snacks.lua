@@ -3,6 +3,9 @@ return {
   "folke/snacks.nvim",
   ---@type snacks.Config
   opts = {
+    image = {
+      enabled = true,
+    },
     picker = {
       actions = {
         delete_projects = function(picker, _)
