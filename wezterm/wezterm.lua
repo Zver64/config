@@ -1,6 +1,15 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
+
+function merge_tables(t1, t2)
+  for _, val in ipairs(t2) do
+    table.insert(t1, val)
+  end
+  return t1
+end
+
+
 config.font = wezterm.font("FiraMono Nerd Font")
 config.font_size = 16
 config.color_scheme = "Catppuccin Mocha"
@@ -49,10 +58,16 @@ config.keys = {
 -- This ensures a valid table to work with.
 local search_mode = wezterm.gui.default_key_tables().search_mode or {}
 local copy_mode = wezterm.gui.default_key_tables().copy_mode or {}
+local common_mode = {
+    key = "[",
+    mods = "CTRL",
+    action = wezterm.action.CopyMode("Close")
+  }
 
-table.insert(search_mode, { key = "[", mods = "CTRL", action = wezterm.action.CopyMode("Close") })
-table.insert(copy_mode, { key = "[", mods = "CTRL", action = wezterm.action.CopyMode("Close") })
-table.insert(search_mode, { key = "Enter", mods = "NONE", action = wezterm.action.CopyMode("AcceptPattern") })
+
+table.insert(search_mode, common_mode)
+table.insert(copy_mode, common_mode)
+-- table.insert(search_mode, { key = "Enter", mods = "NONE", action = wezterm.action.CopyMode("AcceptPattern") })
 
 -- Assign the modified key table to the configuration.
 config.key_tables = {
