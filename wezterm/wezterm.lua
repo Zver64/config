@@ -60,6 +60,8 @@ config.keys = {
 		mods = "LEADER",
 		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
 	},
+  { key = '{', mods = 'LEADER', action = wezterm.action.MoveTabRelative(-1) },
+  { key = '}', mods = 'LEADER', action = wezterm.action.MoveTabRelative(1) },
 }
 
 -- Create a copy of the default search_mode key table.
