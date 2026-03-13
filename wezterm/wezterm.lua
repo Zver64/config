@@ -1,14 +1,15 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
-
 function merge_tables(t1, t2)
-  for _, val in ipairs(t2) do
-    table.insert(t1, val)
-  end
-  return t1
+	for _, val in ipairs(t2) do
+		table.insert(t1, val)
+	end
+	return t1
 end
 
+-- leader like in tmux
+config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 1000 }
 
 config.font = wezterm.font("FiraMono Nerd Font")
 config.font_size = 16
@@ -44,7 +45,19 @@ config.keys = {
 	{
 		key = "|",
 		mods = "CMD|SHIFT",
-		action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' },
+		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+	},
+	-- Вертикальный сплит (Leader + v)
+	{
+		key = "v",
+		mods = "LEADER",
+		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+	},
+	-- Горизонтальный сплит (Leader + h)
+	{
+		key = "h",
+		mods = "LEADER",
+		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
 	},
 	{ key = "h", mods = "CMD|ALT", action = wezterm.action.ActivatePaneDirection("Left") },
 	{ key = "l", mods = "CMD|ALT", action = wezterm.action.ActivatePaneDirection("Right") },
@@ -59,11 +72,10 @@ config.keys = {
 local search_mode = wezterm.gui.default_key_tables().search_mode or {}
 local copy_mode = wezterm.gui.default_key_tables().copy_mode or {}
 local common_mode = {
-    key = "[",
-    mods = "CTRL",
-    action = wezterm.action.CopyMode("Close")
-  }
-
+	key = "[",
+	mods = "CTRL",
+	action = wezterm.action.CopyMode("Close"),
+}
 
 table.insert(search_mode, common_mode)
 table.insert(copy_mode, common_mode)
