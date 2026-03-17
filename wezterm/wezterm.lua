@@ -60,8 +60,55 @@ config.keys = {
 		mods = "LEADER",
 		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
 	},
-  { key = '{', mods = 'LEADER', action = wezterm.action.MoveTabRelative(-1) },
-  { key = '}', mods = 'LEADER', action = wezterm.action.MoveTabRelative(1) },
+	{
+		key = "w",
+		mods = "LEADER",
+		-- Эта строка "отбирает" кнопку у дебага и отдает её списку сессий
+		action = wezterm.action.ShowLauncherArgs({ flags = "WORKSPACES" }),
+	},
+	{
+		key = "n",
+		mods = "LEADER",
+		-- Эта строка "отбирает" кнопку у дебага и отдает её списку сессий
+		action = wezterm.action.PromptInputLine({
+			description = wezterm.format({
+				{ Attribute = { Intensity = "Bold" } },
+				{ Foreground = { AnsiColor = "Fuchsia" } },
+				{ Text = "New workspace: " },
+			}),
+			action = wezterm.action_callback(function(window, pane, line)
+				-- если нажал Enter и что-то ввел
+				if line then
+					window:perform_action(
+						wezterm.action.SwitchToWorkspace({
+							name = line,
+						}),
+						pane
+					)
+				end
+			end),
+		}),
+	},
+	{
+		key = "r",
+		mods = "LEADER",
+		action = wezterm.action.PromptInputLine({
+			description = wezterm.format({
+				{ Attribute = { Intensity = "Bold" } },
+				{ Foreground = { AnsiColor = "Aqua" } },
+				{ Text = "Rename workspace: " },
+			}),
+			action = wezterm.action_callback(function(window, pane, line)
+				if line then
+					wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), line)
+				end
+			end),
+		}),
+	},
+	-- Переместить вкладку на одну позицию влево
+	{ key = "{", mods = "LEADER", action = wezterm.action.MoveTabRelative(-1) },
+	-- Переместить вкладку на одну позицию вправо
+	{ key = "}", mods = "LEADER", action = wezterm.action.MoveTabRelative(1) },
 }
 
 -- Create a copy of the default search_mode key table.
@@ -104,5 +151,31 @@ smart_splits.apply_to_config(config, {
 	-- log level to use: info, warn, error
 	log_level = "info",
 })
+
+wezterm.on("update-right-status", function(window, pane)
+	-- Получаем актуальную палитру цветов текущей темы
+	local overrides = window:effective_config()
+	local palette = overrides.resolved_palette
+
+	local name = window:active_workspace()
+	local stat = " " .. name .. " "
+
+	-- По умолчанию берем 5-й цвет ANSI (обычно Magenta/Purple)
+	-- или palette.foreground для обычного текста
+	local stat_color = palette.ansi[5]
+
+	-- ПРОВЕРКА: нажат ли Leader
+	if window:leader_is_active() then
+		stat = "  LEADER  "
+		-- Берем 4-й цвет ANSI (обычно Yellow/Orange в большинстве тем)
+		stat_color = palette.ansi[4]
+	end
+
+	window:set_right_status(wezterm.format({
+		{ Foreground = { Color = stat_color } },
+		{ Attribute = { Intensity = "Bold" } },
+		{ Text = stat },
+	}))
+end)
 
 return config
