@@ -32,6 +32,7 @@ return {
         },
         explorer = {
           hidden = true,
+          ignored = true,
         },
         grep = {
           hidden = true,
