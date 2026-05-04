@@ -10,6 +10,7 @@ return {
       "eslint_d",
       "taplo",
       "css-lsp",
+      "tree-sitter-cli",
     },
   },
 }
