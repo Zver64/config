@@ -16,6 +16,8 @@ config.font = wezterm.font("FiraMono Nerd Font")
 config.font_size = 16
 config.color_scheme = "Catppuccin Mocha"
 config.scrollback_lines = 50000
+-- special term needs to be preconfigured. see here: https://wezterm.org/config/lua/config/term.html
+config.term = "wezterm"
 
 config.keys = {
 	{
