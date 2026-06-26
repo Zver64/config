@@ -1,3 +1,4 @@
 theme = Catppuccin Macchiato
 font-size = 16
 font-family = "FiraMono Nerd Font"
+macos-option-as-alt = true
