@@ -2,3 +2,10 @@ theme = Catppuccin Macchiato
 font-size = 16
 font-family = "FiraMono Nerd Font"
 macos-option-as-alt = true
+
+# --- Vim-style Split Pane Keybinds ---
+# Allows navigating native Ghostty splits using Ctrl+Shift+H/J/K/L
+keybind = ctrl+shift+h=goto_split:left
+keybind = ctrl+shift+j=goto_split:down
+keybind = ctrl+shift+k=goto_split:up
+keybind = ctrl+shift+l=goto_split:right
