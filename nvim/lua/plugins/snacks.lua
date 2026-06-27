@@ -4,7 +4,14 @@ return {
   ---@type snacks.Config
   opts = {
     image = {
-      enabled = true,
+      doc = {
+        -- Keep automatic inline rendering limited to Markdown via the autocmd below.
+        enabled = false,
+        inline = true,
+        float = false,
+        max_width = 45,
+        max_height = 18,
+      },
     },
     picker = {
       actions = {
@@ -52,4 +59,33 @@ return {
       },
     },
   },
+  keys = {
+    {
+      "<leader>ih",
+      function()
+        Snacks.image.hover()
+      end,
+      desc = "Show Image Under Cursor",
+    },
+    {
+      "<leader>iH",
+      function()
+        Snacks.image.doc.hover_close()
+      end,
+      desc = "Close Image Preview",
+    },
+  },
+  init = function()
+    vim.api.nvim_create_autocmd("FileType", {
+      group = vim.api.nvim_create_augroup("user_snacks_markdown_images", { clear = true }),
+      pattern = { "markdown", "markdown.mdx" },
+      callback = function(event)
+        vim.schedule(function()
+          if vim.api.nvim_buf_is_valid(event.buf) then
+            Snacks.image.doc.attach(event.buf)
+          end
+        end)
+      end,
+    })
+  end,
 }
