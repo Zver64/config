@@ -93,8 +93,8 @@ automatically-unhide-macos-hidden-apps = true
     #
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
-    alt-shift-t = 'layout tiles horizontal vertical'
-    alt-shift-a = 'layout accordion horizontal vertical'
+    alt-period = 'layout tiles horizontal vertical'
+    alt-slash = 'layout accordion horizontal vertical'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
     alt-shift-h = 'focus left'
@@ -176,5 +176,5 @@ automatically-unhide-macos-hidden-apps = true
 [[on-window-detected]]
 if.app-id="com.mitchellh.ghostty"
 run= [
-  "layout tiling",
+  "layout floating",
 ]
