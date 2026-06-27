@@ -30,6 +30,5 @@ vim.diagnostic.config({
   update_in_insert = true,
 })
 
-vim.o.exrc = true
 -- show actually changed characters
 vim.opt.diffopt:append("linematch:60")

@@ -1,13 +1,16 @@
-require("catppuccin").setup({
-  custom_highlights = function(colors)
-    return {
-      LineNr = { fg = colors.text }, -- Example: Set line numbers to Catppuccin's 'text' color
-      CursorLineNr = { fg = colors.peach }, -- Example: Set current line number to Catppuccin's 'peach' color
-    }
-  end,
-})
-
 return {
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    opts = {
+      custom_highlights = function(colors)
+        return {
+          LineNr = { fg = colors.text },
+          CursorLineNr = { fg = colors.peach },
+        }
+      end,
+    },
+  },
   {
     "LazyVim/LazyVim",
     opts = {

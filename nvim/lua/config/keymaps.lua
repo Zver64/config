@@ -16,8 +16,11 @@ end, { desc = "Copy relative file path" })
 
 vim.keymap.set("n", "<leader>afd", function()
   local current_file = vim.fn.expand("%:p")
-  local command = string.format("silent !rm %s", current_file)
-  vim.cmd(command)
+  local ok = vim.fn.delete(current_file) == 0
+  if not ok then
+    vim.notify("failed to delete file: " .. current_file, vim.log.levels.ERROR)
+    return
+  end
   vim.cmd("bdelete")
   vim.notify("file deleted: " .. current_file)
 end, { desc = "Delete current file" })
