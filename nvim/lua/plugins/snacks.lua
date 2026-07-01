@@ -14,6 +14,13 @@ return {
       },
     },
     picker = {
+      layout = {
+        preset = "vertical",
+        layout = {
+          width = 0.9,
+          [3] = { height = 0.7 },
+        },
+      },
       actions = {
         delete_projects = function(picker, _)
           Snacks.picker.actions.close(picker)
