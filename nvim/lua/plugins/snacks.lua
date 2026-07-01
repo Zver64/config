@@ -16,9 +16,13 @@ return {
     picker = {
       layout = {
         preset = "vertical",
-        layout = {
-          width = 0.9,
-          [3] = { height = 0.7 },
+      },
+      layouts = {
+        vertical = {
+          layout = {
+            width = 0.9,
+            [3] = { height = 0.7 },
+          },
         },
       },
       actions = {
