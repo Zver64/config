@@ -1,3 +1,5 @@
+---@module 'lazy'
+---@type LazySpec
 return {
   "obsidian-nvim/obsidian.nvim",
   version = "*", -- use latest release, remove to use latest commit
