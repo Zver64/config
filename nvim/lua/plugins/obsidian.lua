@@ -3,11 +3,16 @@
 return {
   "obsidian-nvim/obsidian.nvim",
   version = "*", -- use latest release, remove to use latest commit
-  ft = "markdown",
   ---@module 'obsidian'
   ---@type obsidian.config
   opts = {
-    ui = { enable = false },
+    legacy_commands = false,
+
+    daily_notes = {
+      enabled = true,
+      folder = "daily notes",
+      date_format = "YYYY/MM/YYYY-MM-DD",
+    },
     workspaces = {
       {
         name = "work",
