@@ -3,7 +3,7 @@ return {
   lazy = false,
   opts = {
     -- Явно включаем интеграцию, чтобы плагин знал, куда "выпрыгивать"
-    multiplexer_integration = "wezterm",
+    multiplexer_integration = "tmux",
   },
   keys = {
     -- Настраиваем Ctrl + hjkl через функции плагина
