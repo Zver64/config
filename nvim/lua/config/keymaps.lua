@@ -49,3 +49,7 @@ vim.keymap.set("n", "<leader>abc", function()
   vim.fn.setreg("+", branch)
   print("Copied branch: " .. branch)
 end, { desc = "Copy current git branch" })
+
+vim.keymap.set("n", "<leader>ba", function()
+  Snacks.bufdelete.all()
+end, { desc = "Delete All Buffers" })
