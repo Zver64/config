@@ -1,5 +1,5 @@
 -- Copy relative file path with line number
-vim.keymap.set("n", "<leader>apl", function()
+vim.keymap.set("n", "<leader>fCl", function()
   local path = vim.fn.fnamemodify(vim.fn.expand("%"), ":.")
   local line = vim.fn.line(".")
   local result = string.format("%s:%d", path, line)
@@ -8,7 +8,7 @@ vim.keymap.set("n", "<leader>apl", function()
 end, { desc = "Copy relative file path with line number" })
 
 -- Copy relative file path without line number
-vim.keymap.set("n", "<leader>apf", function()
+vim.keymap.set("n", "<leader>fCf", function()
   local path = vim.fn.fnamemodify(vim.fn.expand("%"), ":.")
   vim.fn.setreg("+", path)
   vim.notify("Copied: " .. path)
