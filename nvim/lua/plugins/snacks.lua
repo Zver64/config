@@ -14,6 +14,11 @@ return {
       },
     },
     picker = {
+      previewers = {
+        diff = {
+          style = "terminal",
+        },
+      },
       layout = {
         preset = "vertical",
       },
