@@ -2,6 +2,8 @@ theme = Catppuccin Macchiato
 font-size = 16
 font-family = "FiraMono Nerd Font"
 macos-option-as-alt = true
+#fix vi mode in terminal
+keybind = ctrl+left_bracket=text:\x1b
 
 # --- Vim-style Split Pane Keybinds ---
 # Allows navigating native Ghostty splits using Ctrl+Shift+H/J/K/L
